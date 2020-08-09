@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/spinnerLargeWeather"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <Spinner
+        android:id="@+id/spinnerMiddleWeather"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <Spinner
+        android:id="@+id/spinnerSmallWeather"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSubmitWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날씨정보" />
+
+        <TextView
+            android:id="@+id/regionTextWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지역정보(x,y)"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:padding="10dp"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/detailTextWeather"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="#221fcef5"
+        android:lines="17"
+        android:scrollHorizontally="false"
+        android:scrollbars="vertical"
+        android:textSize="15dp" />
+
+
+</LinearLayout>
