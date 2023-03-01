@@ -3,12 +3,11 @@ package com.ksoocho.farmdiary;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -171,7 +170,7 @@ public class DiaryActivity extends AppCompatActivity {
 
         private ProgressDialog pDialog;
 
-        private static final String DIARY_URL = "http://ksoocho.cafe24.com/farm_diary/ajax/ajaxDiarySelectPlan.php";
+        private static final String DIARY_URL = "https://ksoocho.cafe24.com/farm_diary/ajax/ajaxDiarySelectPlan.php";
 
         @Override
         protected void onPreExecute() {

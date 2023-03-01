@@ -2,7 +2,7 @@ package com.ksoocho.farmdiary;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -107,7 +105,7 @@ public class WeatherActivity extends AppCompatActivity {
 
             ArrayList<String[]> list2 = new ArrayList<String[]>();
 
-            RSSurl = new URL("http://www.kma.go.kr/DFSROOT/POINT/DATA/top.json.txt");
+            RSSurl = new URL("https://www.kma.go.kr/DFSROOT/POINT/DATA/top.json.txt");
             RJ = new rcvJson();
             RJ.start();
             RJ.join();
@@ -191,7 +189,7 @@ public class WeatherActivity extends AppCompatActivity {
 
             ArrayList<String[]> list2 = new ArrayList<String[]>();
 
-            RSSurl = new URL("http://www.kma.go.kr/DFSROOT/POINT/DATA/mdl."+p_region_id+".json.txt");
+            RSSurl = new URL("https://www.kma.go.kr/DFSROOT/POINT/DATA/mdl."+p_region_id+".json.txt");
             RJ = new rcvJson();
             RJ.start();
             RJ.join();
@@ -268,7 +266,7 @@ public class WeatherActivity extends AppCompatActivity {
 
             ArrayList<String[]> list2 = new ArrayList<String[]>();
 
-            RSSurl = new URL("http://www.kma.go.kr/DFSROOT/POINT/DATA/leaf."+p_region_id+".json.txt");
+            RSSurl = new URL("https://www.kma.go.kr/DFSROOT/POINT/DATA/leaf."+p_region_id+".json.txt");
             RJ = new rcvJson();
             RJ.start();
             RJ.join();
@@ -379,7 +377,7 @@ public class WeatherActivity extends AppCompatActivity {
             JSONArray JSA;
 
             // 지역 대분류
-            RSSurl = new URL("http://www.kma.go.kr/DFSROOT/POINT/DATA/top.json.txt");
+            RSSurl = new URL("https://www.kma.go.kr/DFSROOT/POINT/DATA/top.json.txt");
             RJ = new rcvJson();
             RJ.start();
             RJ.join();
@@ -396,7 +394,7 @@ public class WeatherActivity extends AppCompatActivity {
             }
 
             // 지역 중분류
-            RSSurl = new URL("http://www.kma.go.kr/DFSROOT/POINT/DATA/mdl."+temp+".json.txt");
+            RSSurl = new URL("https://www.kma.go.kr/DFSROOT/POINT/DATA/mdl."+temp+".json.txt");
             RJ = new rcvJson();
             RJ.start();
             RJ.join();
@@ -412,7 +410,7 @@ public class WeatherActivity extends AppCompatActivity {
                 }
             }
 
-            RSSurl = new URL("http://www.kma.go.kr/DFSROOT/POINT/DATA/leaf."+temp+".json.txt");
+            RSSurl = new URL("https://www.kma.go.kr/DFSROOT/POINT/DATA/leaf."+temp+".json.txt");
             RJ = new rcvJson();
             RJ.start();
             RJ.join();
@@ -586,7 +584,7 @@ public class WeatherActivity extends AppCompatActivity {
     class rcvXml extends Thread {
         public void run() {
 
-            String page = "http://www.kma.go.kr/wid/queryDFS.jsp?gridx="+posX+"&gridy="+posY;
+            String page = "https://www.kma.go.kr/wid/queryDFS.jsp?gridx="+posX+"&gridy="+posY;
 
             try {
                 url = new URL(page);

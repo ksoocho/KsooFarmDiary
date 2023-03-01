@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.MotionEvent;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,12 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -66,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureList
         farmerPlantId = 0; // 일반, 농작물별 일지 추가예정
 
         // 화면 Title 변경하기
-        String vTitle = new PrefManager(this).getUserName()+" 일기";
+        String vTitle = new PrefManager(this).getUserName()+" Diary";
         setTitle(vTitle);
 
         setContentView(R.layout.activity_main);
@@ -193,8 +187,8 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureList
             case 2: // WriteActivity , DiaryActivity
 
                 refreshMonth();
-                String message=data.getStringExtra("MESSAGE");
-                Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
+                //String message=data.getStringExtra("MESSAGE");
+                //Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
 
                 break;
 
@@ -267,19 +261,19 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureList
 
             case SimpleGestureFilter.SWIPE_RIGHT:
                 setMonthPrevious();
-                showToastMessage = "Swipe Right";
+                showToastMessage = "Previous Month";
                 break;
             case SimpleGestureFilter.SWIPE_LEFT:
                 setMonthNext();
-                showToastMessage = "Swipe Left";
+                showToastMessage = "Next Month";
                 break;
             case SimpleGestureFilter.SWIPE_DOWN:
                 setYearPrevious();
-                showToastMessage = "Swipe Down";
+                showToastMessage = "Previous Year";
                 break;
             case SimpleGestureFilter.SWIPE_UP:
                 setYearNext();
-                showToastMessage = "Swipe Up";
+                showToastMessage = "Next Year";
                 break;
 
         }
@@ -580,7 +574,7 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureList
 
         private ProgressDialog pDialog;
 
-        private static final String LOGIN_URL = "http://ksoocho.cafe24.com/farm_diary/ajax/ajaxMonthDiaryDate.php";
+        private static final String LOGIN_URL = "https://ksoocho.cafe24.com/farm_diary/ajax/ajaxMonthDiaryDate.php";
 
         @Override
         protected void onPreExecute() {
@@ -600,6 +594,7 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureList
 
                 params.put("user_id", String.valueOf(args[0].user_id));
                 params.put("plant_id", String.valueOf(args[0].plant_id));
+
                 params.put("solar_date", args[0].diary_date);
 
                 Log.d("Request", "starting");
@@ -659,6 +654,7 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureList
                         }
 
                         // Description을 5자리까지 보여 주기 + 한 줄만 보 여주기
+                        /*
                         Reader inputString = new StringReader(diary_descr);
                         BufferedReader br;
                         String line_descr = "";
@@ -677,6 +673,9 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureList
                         }
 
                         items[start_inx+solar_day-1].setDiaryDescr(line_descr);
+                        */
+
+                        items[start_inx+solar_day-1].setDiaryDescr(diary_descr);
 
                     }
 

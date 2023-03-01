@@ -4,7 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -137,9 +137,9 @@ public class UpdateActivity extends AppCompatActivity {
 
         private ProgressDialog pDialog;
 
-        private static final String UPDATE_PLAN_URL = "http://ksoocho.cafe24.com/farm_diary/ajax/ajaxDiaryUpdatePlan.php";
-        private static final String UPDATE_ACT_URL = "http://ksoocho.cafe24.com/farm_diary/ajax/ajaxDiaryUpdateAct.php";
-        private static final String UPDATE_MEMO_URL = "http://ksoocho.cafe24.com/farm_diary/ajax/ajaxDiaryUpdateMemo.php";
+        private static final String UPDATE_PLAN_URL = "https://ksoocho.cafe24.com/farm_diary/ajax/ajaxDiaryUpdatePlan.php";
+        private static final String UPDATE_ACT_URL = "https://ksoocho.cafe24.com/farm_diary/ajax/ajaxDiaryUpdateAct.php";
+        private static final String UPDATE_MEMO_URL = "https://ksoocho.cafe24.com/farm_diary/ajax/ajaxDiaryUpdateMemo.php";
 
         @Override
         protected void onPreExecute() {

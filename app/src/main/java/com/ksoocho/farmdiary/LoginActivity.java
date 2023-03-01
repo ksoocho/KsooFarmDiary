@@ -6,9 +6,9 @@ import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
 import android.content.CursorLoader;
@@ -21,7 +21,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -74,10 +73,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -89,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -294,7 +293,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         };
 
         int ADDRESS = 0;
-        int IS_PRIMARY = 1;
     }
 
     /**
@@ -328,11 +326,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
 
             int v_user_id = 0;
+            String v_user_code = " ";
             String v_user_name = " ";
             String v_return_code = "E";
 
-            String LOGIN_URL = "http://ksoocho.cafe24.com/farm_diary/ajax/ajaxUserLogin.php";
-            String REGIST_URL = "http://ksoocho.cafe24.com/farm_diary/ajax/ajaxUserInsert.php";
+            String LOGIN_URL = "https://ksoocho.cafe24.com/farm_diary/ajax/ajaxUserLogin.php";
+            String REGIST_URL = "https://ksoocho.cafe24.com/farm_diary/ajax/ajaxUserInsert.php";
 
             try {
 
@@ -346,6 +345,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 JSONObject obj = json.getJSONObject(0);
 
                 v_user_id = obj.getInt("user_id");
+                v_user_code = obj.getString("user_code");
                 v_user_name = obj.getString("user_name");
                 v_return_code = obj.getString("return_code");
 
@@ -354,28 +354,36 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             // 사용자 등록
-            if (!v_return_code.equals("S")) {
+            if (!v_return_code.equals("S") ) {
 
-                String v_new_user = "NEW";
+                if (v_user_code.equals(" ")) {
 
-                try {
+                    String v_new_user = "New User";
 
-                    HashMap<String, String> para = new HashMap<>();
-                    para.put("user_code", mEmail);
-                    para.put("user_pwd", mPassword);
-                    para.put("user_name", v_new_user);
+                    try {
 
-                    JSONArray json = jsonParser.makeHttpRequestArr(REGIST_URL, "POST", para);
-                    Thread.sleep(2000);
+                        HashMap<String, String> para = new HashMap<>();
+                        para.put("user_code", mEmail);
+                        para.put("user_pwd", mPassword);
+                        para.put("user_name", v_new_user);
 
-                    JSONObject obj = json.getJSONObject(0);
+                        JSONArray json = jsonParser.makeHttpRequestArr(REGIST_URL, "POST", para);
+                        Thread.sleep(2000);
 
-                    v_user_id = obj.getInt("user_id");
-                    v_user_name = v_new_user;
-                    v_return_code = obj.getString("return_code");
+                        JSONObject obj = json.getJSONObject(0);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        v_user_id = obj.getInt("user_id");
+                        v_user_name = v_new_user;
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    //String v_new_user = "Already Registered User";
+
+                    removeLoginDetails();
+                    return false;
                 }
 
             }
@@ -383,23 +391,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Login Success
             saveLoginDetails(mEmail, v_user_id, v_user_name);
             return true;
-
-            /*
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-            */
 
         }
 
@@ -429,6 +420,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private void saveLoginDetails(String email, int userId, String userName) {
         new PrefManager(this).saveLoginDetails(email, userId, userName);
+    }
+
+    private void removeLoginDetails() {
+        new PrefManager(this).removeLoginDetails();
     }
 
     private void startMainActivity() {

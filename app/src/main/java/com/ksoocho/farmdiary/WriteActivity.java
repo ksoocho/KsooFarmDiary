@@ -3,22 +3,18 @@ package com.ksoocho.farmdiary;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -123,7 +119,7 @@ public class WriteActivity extends AppCompatActivity {
 
         private ProgressDialog pDialog;
 
-        private static final String WRITE_URL = "http://ksoocho.cafe24.com/farm_diary/ajax/ajaxDiaryInsertPlan.php";
+        private static final String WRITE_URL = "https://ksoocho.cafe24.com/farm_diary/ajax/ajaxDiaryInsertPlan.php";
 
         @Override
         protected void onPreExecute() {

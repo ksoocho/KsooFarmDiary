@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">꼼꼼일지</string>
-    <string name="title_activity_login">로그인</string>
-    <string name="title_activity_write">계획등록</string>
-    <string name="title_activity_update">일지수정</string>
-    <string name="title_activity_diary">일지</string>
-    <string name="title_activity_weather">날씨</string>
+    <string name="app_name">꼼꼼 Diary</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_write">꼼꼼 Diary 등록</string>
+    <string name="title_activity_update">꼼꼼 Diary 수정</string>
+    <string name="title_activity_diary">꼼꼼 Diary</string>
+    <string name="title_activity_weather">날씨정보</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
